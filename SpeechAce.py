@@ -28,6 +28,7 @@ class SpeechAce:
         payload ={
             'include_fluency': '1', 
             'include_intonation': '1',
+            'include_speech_score': '1',
             'include_ielts_subscore': '1',
             'include_ielts_feedback': '1',
         }
