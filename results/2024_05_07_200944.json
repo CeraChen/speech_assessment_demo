@@ -3,7 +3,7 @@
     "task_score": {
         "type": "describe-image",
         "version": "0.2",
-        "score": 2,
+        "score": 4,
         "transcript": "Hmm. So here is my voice message to Lu Hong. MMM Hi Lou. I noticed that you've been depressed for a long time uh uh, and probably because of the uh stress from study. And I fully understand it, but I don't think that you should solve this uh by. By. Plagiarizing. Uh, because I noticed that your paper is badly written and I think it's obvious uh for the professor too, and it would uh bring a lot of trouble to you if you submitted UH tomorrow. And I think we can we can, uh make another like totally generated. For you a good essay today I would help you to do that and please come to me. And the Starbucks? And good luck."
     },
     "quota_remaining": -1,
@@ -569,7 +569,7 @@
                             0,
                             1
                         ],
-                        "sound_most_like": "f",
+                        "sound_most_like": "v",
                         "child_phones": [
                             {
                                 "extent": [
@@ -1007,7 +1007,7 @@
                             0,
                             1
                         ],
-                        "sound_most_like": "ah",
+                        "sound_most_like": "aa",
                         "child_phones": [
                             {
                                 "extent": [
@@ -4530,7 +4530,7 @@
                             0,
                             1
                         ],
-                        "sound_most_like": "r",
+                        "sound_most_like": "l",
                         "child_phones": [
                             {
                                 "extent": [
@@ -8347,7 +8347,7 @@
                             5,
                             7
                         ],
-                        "sound_most_like": "eh",
+                        "sound_most_like": "aa",
                         "child_phones": [
                             {
                                 "extent": [
