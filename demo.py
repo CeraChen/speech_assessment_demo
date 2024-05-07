@@ -16,11 +16,11 @@ if __name__=="__main__":
     recorder = Recorder(api_key)
     
     task_assigned = True
-    task_type = "describe-image" # One of these three types: describe-image, retell-lecture, answer-question
-    task_context = open("./task_context.txt", "r", encoding="utf-8").read() # As the ONLY scoring basis
-    assert len(task_context) <= 1024, "The task context should not exceed 1024 characters, but it currently contains {} characters. Please REDUCE its length.".format(len(task_context))
-    
     if task_assigned:
+        task_type = "describe-image" # One of these three types: describe-image, retell-lecture, answer-question
+        task_context = open("./task_context.txt", "r", encoding="utf-8").read() # As the ONLY scoring basis
+        assert len(task_context) <= 1024, "The task context should not exceed 1024 characters, but it currently contains {} characters. Please REDUCE its length.".format(len(task_context))
+    
         recorder.assign_task(task_type, task_context)
         print(task_context)
         print("A {} task has been assigned, please give your answer according to this task.".format(task_type))
