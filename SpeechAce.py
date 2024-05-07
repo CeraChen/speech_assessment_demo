@@ -13,6 +13,16 @@ class SpeechAce:
                     '&dialect=' + self.dialect + \
                     '&user_id=' + self.user_id
                     
+    
+    def _get_premium_task_url(self, task_type):
+        #"https://api.speechace.co/api/scoring/task/v9/json" + \
+        self.premium_task_url = "https://api2.speechace.com/api/scoring/task/v9/json" + \
+                    '?' + 'key=' + self.api_key + \
+                    '&task_type=' + task_type + \
+                    '&dialect=' + self.dialect + \
+                    '&user_id=' + self.user_id
+        # print(self.premium_task_url)
+                    
                     
     def print_result(self, result):
         print("IELTS overall:\t", result["speech_score"]["ielts_score"]["overall"])
@@ -21,7 +31,12 @@ class SpeechAce:
         print("Coherence:\t", result["speech_score"]["ielts_score"]["coherence"])
         print("Grammar:\t", result["speech_score"]["ielts_score"]["grammar"])
         print("Vocabulary:\t", result["speech_score"]["ielts_score"]["vocab"])
+        try:
+            print("Task Score:\t", result["task_score"]["score"])
+        except:
+            None
         print("Transcript:\n", result["speech_score"]["transcript"])
+        
         
         
     def send_premium_request(self, audio_path):
@@ -46,3 +61,32 @@ class SpeechAce:
         self.print_result(json_result)
         
         return result
+    
+    
+    def send_premium_task_request(self, audio_path, task_type, task_context):
+        payload ={
+            'include_fluency': '1', 
+            'include_intonation': '1',
+            'include_speech_score': '1',
+            'include_ielts_subscore': '1',
+            'include_ielts_feedback': '1',
+            'task_context': task_context,
+        }
+        audio = open(audio_path, 'rb')
+        files = {
+            'user_audio_file': audio,
+            }
+        self._get_premium_task_url(task_type)
+        response = requests.post(self.premium_task_url, data=payload, files=files)
+        json_result = json.loads(str(response.text))
+        result = json.dumps(json_result, indent=4)
+        
+        splits = audio_path.split("/")
+        file_path = "./results/" + splits[-1][:-3] + "json"
+        with open(file_path, 'w') as f:
+            f.write(result)
+        print("Saved result to {}".format(file_path))        
+        self.print_result(json_result)
+        
+        return result
+    

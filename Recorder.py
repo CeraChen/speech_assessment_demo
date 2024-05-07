@@ -10,7 +10,7 @@ CHUNK = 1024
 FORMAT = pyaudio.paInt16  # 16bit encoding wav
 CHANNELS = 1  # single
 RATE = 16000  # sample rate
-MAX_RECORD_SECONDS = 2 * 60 # no longer than 2 minute 
+MAX_RECORD_SECONDS = 2 * 58 # no longer than 2 minute 
 MAX_LOOP_NUM = int(RATE / CHUNK * MAX_RECORD_SECONDS)
 
 START = 0
@@ -24,7 +24,14 @@ class Recorder:
        self.isRecording = False
        self.frames = []
        self.audio = None
-       self.stream = None          
+       self.stream = None 
+       
+       self.task_assigned = False  
+       
+    def assign_task(self, task_type, task_context):
+        self.task_assigned = True
+        self.task_type = task_type
+        self.task_context = task_context       
        
     def start_recording(self):
         self.isRecording = True
@@ -42,7 +49,7 @@ class Recorder:
             i += 1
             if(keyboard.is_pressed("space") or i == MAX_LOOP_NUM):
                 if(i == MAX_LOOP_NUM):
-                    print("Exceed one minute. Recording ends.")
+                    print("Exceed two minute. Recording ends.")
                 else:
                     self.beep(END)
                     print("-- Space is pressed --")      
@@ -68,7 +75,11 @@ class Recorder:
             wf.writeframes(b''.join(self.frames))
             wf.close()
             print(f"Saved speech to {audio_path}")
-            self.speechace.send_premium_request(audio_path)
+            
+            if self.task_assigned:
+                self.speechace.send_premium_task_request(audio_path, self.task_type, self.task_context)
+            else:
+                self.speechace.send_premium_request(audio_path)
             
         except Exception as e:
             print(e)     

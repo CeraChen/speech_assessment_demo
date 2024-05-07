@@ -6,4 +6,9 @@ from SpeechAce import SpeechAce
 load_dotenv()
 api_key = os.getenv("SPEECHACE_API_KEY")
 speechace = SpeechAce(api_key)
-speechace.send_premium_request("./audio/test.webm")
+
+dir = "./tmp"
+for file in os.listdir(dir):
+    print(file)
+    path = dir + "/" + file
+    speechace.send_premium_request(path)
