@@ -1,6 +1,8 @@
 .env
 speech/*
 results/*
-backup
+backup/
 score_task_speech
 context/
+task_context.txt
+demo_2.py
