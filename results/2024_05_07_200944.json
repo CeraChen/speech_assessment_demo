@@ -569,7 +569,7 @@
                             0,
                             1
                         ],
-                        "sound_most_like": "v",
+                        "sound_most_like": "f",
                         "child_phones": [
                             {
                                 "extent": [
@@ -4530,7 +4530,7 @@
                             0,
                             1
                         ],
-                        "sound_most_like": "l",
+                        "sound_most_like": "r",
                         "child_phones": [
                             {
                                 "extent": [
@@ -6527,7 +6527,7 @@
                             2,
                             4
                         ],
-                        "sound_most_like": "ih",
+                        "sound_most_like": "ah",
                         "child_phones": [
                             {
                                 "extent": [
@@ -8347,7 +8347,7 @@
                             5,
                             7
                         ],
-                        "sound_most_like": "aa",
+                        "sound_most_like": "eh",
                         "child_phones": [
                             {
                                 "extent": [
@@ -9008,7 +9008,7 @@
                             2,
                             3
                         ],
-                        "sound_most_like": "th",
+                        "sound_most_like": "t",
                         "child_phones": [
                             {
                                 "extent": [

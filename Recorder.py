@@ -19,14 +19,15 @@ END = 1
     
 
 class Recorder:
-    def __init__(self, api_key) -> None:
+    def __init__(self, api_key, to_assess=True) -> None:
        self.speechace = SpeechAce(api_key) 
        self.isRecording = False
        self.frames = []
        self.audio = None
        self.stream = None 
        
-       self.task_assigned = False  
+       self.task_assigned = False
+       self.to_assess = to_assess
        
     def assign_task(self, task_type, task_context):
         self.task_assigned = True
@@ -53,8 +54,7 @@ class Recorder:
                 else:
                     self.beep(END)
                     print("-- Space is pressed --")      
-                self.stop_recording()
-                break              
+                return self.stop_recording()
     
     
     def stop_recording(self):  
@@ -76,15 +76,17 @@ class Recorder:
             wf.close()
             print(f"Saved speech to {audio_path}")
             
-            if self.task_assigned:
-                self.speechace.send_premium_task_request(audio_path, self.task_type, self.task_context)
-            else:
-                self.speechace.send_premium_request(audio_path)
+            if self.to_assess:
+                if self.task_assigned:
+                    self.speechace.send_premium_task_request(audio_path, self.task_type, self.task_context)
+                else:
+                    self.speechace.send_premium_request(audio_path)
             
         except Exception as e:
             print(e)     
                
         self.frames = [] 
+        return audio_path
         
         
     def beep(self, state):

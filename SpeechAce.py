@@ -31,11 +31,14 @@ class SpeechAce:
         print("Coherence:\t", result["speech_score"]["ielts_score"]["coherence"])
         print("Grammar:\t", result["speech_score"]["ielts_score"]["grammar"])
         print("Vocabulary:\t", result["speech_score"]["ielts_score"]["vocab"])
+        print("Transcript:\n", result["speech_score"]["transcript"])
+    
+    def print_task_result(self, result, context_file):
         try:
-            print("Task Score:\t", result["task_score"]["score"])
+            print("Score based on context {}:\t".format(context_file), result["task_score"]["score"])
         except:
             None
-        print("Transcript:\n", result["speech_score"]["transcript"])
+        
         
         
         
@@ -63,7 +66,7 @@ class SpeechAce:
         return result
     
     
-    def send_premium_task_request(self, audio_path, task_type, task_context):
+    def send_premium_task_request(self, audio_path, task_type, task_context, context_file="", id=None):
         payload ={
             'include_fluency': '1', 
             'include_intonation': '1',
@@ -82,11 +85,17 @@ class SpeechAce:
         result = json.dumps(json_result, indent=4)
         
         splits = audio_path.split("/")
-        file_path = "./results/" + splits[-1][:-3] + "json"
+        if id is not None:
+            file_path = "./results/" + splits[-1][:-4] + "_" + str(id+1) + ".json"
+        else:
+            file_path = "./results/" + splits[-1][:-3] + "json"
+            
         with open(file_path, 'w') as f:
             f.write(result)
-        print("Saved result to {}".format(file_path))        
-        self.print_result(json_result)
+        if id == 0:
+            print("Saved result to {}".format(file_path))
+            self.print_result(json_result)       
+        self.print_task_result(json_result, context_file)
         
         return result
     

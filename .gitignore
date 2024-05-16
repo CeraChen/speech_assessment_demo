@@ -1,3 +1,6 @@
 .env
-./speech/*
-./results/*
+speech/*
+results/*
+backup
+score_task_speech
+context/
