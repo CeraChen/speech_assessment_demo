@@ -25,13 +25,17 @@ class SpeechAce:
                     
                     
     def print_result(self, result):
-        print("IELTS overall:\t", result["speech_score"]["ielts_score"]["overall"])
-        print("Pronunciation:\t", result["speech_score"]["ielts_score"]["pronunciation"])
-        print("Fluency:\t", result["speech_score"]["ielts_score"]["fluency"])
-        print("Coherence:\t", result["speech_score"]["ielts_score"]["coherence"])
-        print("Grammar:\t", result["speech_score"]["ielts_score"]["grammar"])
-        print("Vocabulary:\t", result["speech_score"]["ielts_score"]["vocab"])
-        print("Transcript:\n", result["speech_score"]["transcript"])
+        try:
+            print("IELTS overall:\t", result["speech_score"]["ielts_score"]["overall"])
+            print("Pronunciation:\t", result["speech_score"]["ielts_score"]["pronunciation"])
+            print("Fluency:\t", result["speech_score"]["ielts_score"]["fluency"])
+            print("Coherence:\t", result["speech_score"]["ielts_score"]["coherence"])
+            print("Grammar:\t", result["speech_score"]["ielts_score"]["grammar"])
+            print("Vocabulary:\t", result["speech_score"]["ielts_score"]["vocab"])
+            print("Transcript:\n", result["speech_score"]["transcript"])
+        except:
+            print("Fail to get speech_score")
+            
     
     def print_task_result(self, result, context_file):
         try:
