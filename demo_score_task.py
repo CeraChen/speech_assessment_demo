@@ -49,5 +49,5 @@ if __name__=="__main__":
     summary = pd.DataFrame(columns=columns)
     for key, value in results.items():
         value["audio"] = key
-        summary = summary.append(value, ignore_index=True)
+        summary = pd.concat([summary, pd.DataFrame([value])], ignore_index=True)
     print(summary)
