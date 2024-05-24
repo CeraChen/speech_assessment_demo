@@ -36,8 +36,9 @@ class SpeechAce:
     def print_task_result(self, result, context_file):
         try:
             print("Score based on context {}:\t".format(context_file), result["task_score"]["score"])
+            return result["task_score"]["score"]
         except:
-            None
+            return None
         
         
         
@@ -95,7 +96,7 @@ class SpeechAce:
         if id == 0:
             print("Saved result to {}".format(file_path))
             self.print_result(json_result)       
-        self.print_task_result(json_result, context_file)
+        score = self.print_task_result(json_result, context_file)
         
-        return result
+        return score
     
